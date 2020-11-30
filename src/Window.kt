@@ -7,7 +7,7 @@ import javax.swing.*
 
 class Window: JFrame() {
 
-    val jtInput = JTextField()
+    val tfInput = JTextField()
     val lAnswer = SLabel()
 
     init{
@@ -20,13 +20,14 @@ class Window: JFrame() {
         val lInput = SLabel(600, 100, 100, 32, "Input", fontTitle)
         add(lInput)
 
-        jtInput.setProperties(485, 140, 300, 40, hAlignment = JTextField.CENTER)
-        jtInput.addActionListener { calculate() }
-        add(jtInput)
+        tfInput.setProperties(485, 140, 300, 40, hAlignment = JTextField.CENTER)
+        tfInput.addActionListener { calculate() }
+        add(tfInput)
 
         val lOutput = SLabel(590, 210, 100, 32, "Output", fontTitle)
         add(lOutput)
 
+        lAnswer.setProperties(385, 320, 500, 40, hAlignment = "CENTER")
         add(lAnswer)
 
         val pInfo = JPanel()
@@ -70,7 +71,8 @@ class Window: JFrame() {
     }
 
     private fun calculate() {
-
+        lAnswer.text = tfInput.text.toSufijo()
+        repaint()
     }
 
 }

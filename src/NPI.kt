@@ -5,7 +5,7 @@ fun String.toSufijo(): String {
     val stackDeOperadores = mutableListOf<String>()
     val tokens = this.toTokens()
 
-    while (tokens.isNotEmpty()){
+    while (tokens.isNotEmpty()) {
         val token = tokens.first()
 
         if (token[0].isLetterOrDigit()) {
@@ -14,15 +14,16 @@ fun String.toSufijo(): String {
             if (stackDeOperadores.isEmpty())
                 stackDeOperadores.add(token)
             else {
-                while (stackDeOperadores.isNotEmpty()) {
+                while (stackDeOperadores.size>0 && stackDeOperadores.last()[0].isOperator()) {
                     if (stackDeOperadores.last()[0].precedes(token[0])){
                         colaDeSalida.add(stackDeOperadores.last())
                         stackDeOperadores.removeLast()
                     }else {
-                        if (token[0] != ')')
-                            stackDeOperadores.add(token)
+                        break
                     }
                 }
+                if (token[0] != ')')
+                    stackDeOperadores.add(token)
             }
         } else if (token[0] == '(') {
             stackDeOperadores.add(token)
@@ -67,8 +68,7 @@ private fun String.toTokens(): MutableList<String> {
                 tokens.add(token)
                 token = ""
             }
-        }
-        if(str[0].isLetterOrDigit()) {
+        }else if(str[0].isLetterOrDigit()) {
             token += str[0]
             str = str.substring(1, str.length)
             if(str.isEmpty())
