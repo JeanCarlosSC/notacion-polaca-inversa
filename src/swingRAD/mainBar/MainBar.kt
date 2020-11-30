@@ -2,6 +2,7 @@ package swingRAD.mainBar
 
 import swingRAD.setProperties
 import swingRAD.*
+import swingRAD.sComponents.SLabel
 import java.awt.Color
 import java.awt.Image
 import java.awt.event.MouseEvent
@@ -20,8 +21,8 @@ class MainBar(private val jFrame: JFrame, screenWidth: Int = 1280, move: Boolean
     private val iBtExitOn = ImageIcon("resources/mainBar/btExitOn.png")
     private val iBtExitOff = ImageIcon("resources/mainBar/btExitOff.png")
 
-    private val lLogo = JLabel()
-    private val lTitle = JLabel()
+    private val lLogo = SLabel()
+    private val lTitle = SLabel()
 
     private val btExit = JButton()
 

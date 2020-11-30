@@ -1,6 +1,7 @@
 package swingRAD
 
 import swingRAD.mainBar.MainBar
+import swingRAD.sComponents.SLabel
 import java.awt.*
 import java.awt.event.MouseEvent
 import java.awt.event.MouseListener
@@ -15,35 +16,6 @@ fun JPanel.setProperties(x: Int=0, y: Int=0, width: Int=0, height: Int=0, backgr
     this.background = background
     this.border = border
     this.layout = layout
-}
-
-//JLabel-----------------------------------------------------------------------------------------
-/**
- * icon label
- */
-fun JLabel.setProperties(x: Int, y: Int, icon: ImageIcon, cursor: Cursor? = null) {
-    this.setSize(icon.iconWidth, icon.iconHeight)
-    this.setLocation(x, y)
-    this.icon = icon
-    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-    this.cursor = cursor
-}
-
-/**
- * text label
- */
-fun JLabel.setProperties(x: Int, y: Int, width: Int, height: Int, str: String? = "", font: Font? = fontText, fontColor: Color? = darkWhite,
-                         hAlignment: String? = "LEFT", background: Color? = null) {
-    this.setBounds(x, y, width, height)
-    this.foreground = fontColor
-    this.background = background
-    this.font = font
-    this.text = str
-    this.horizontalAlignment = when(hAlignment) {
-        "CENTER" -> SwingConstants.CENTER
-        "RIGHT" -> SwingConstants.RIGHT
-        else -> SwingConstants.LEFT
-    }
 }
 
 //JFrame-----------------------------------------------------------------------------------------
@@ -68,8 +40,7 @@ fun JFrame.setMainBar(title: String, pathLogo: String = "resources/exampleLogo.p
 }
 
 fun JFrame.setBackground(path: String) {
-    val background = JLabel()
-    background.setProperties(0, 0, ImageIcon(path))
+    val background = SLabel(0, 0, ImageIcon(path))
     this.add(background)
 }
 
