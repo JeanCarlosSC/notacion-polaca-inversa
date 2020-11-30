@@ -125,7 +125,8 @@ fun JTextArea.setProperties(x: Int, y: Int, width: Int, height: Int, editable: B
 
 //JTextField-----------------------------------------------------------------------------------------
 fun JTextField.setProperties(x: Int, y: Int, width: Int, height: Int, editable: Boolean = true, text: String? = "", foreground: Color? = darkWhite,
-                            background: Color? = darkGray, font: Font? = fontText, border: Border? = semiDarkGray2Border) {
+                             background: Color? = darkGray, font: Font? = fontText, border: Border? = semiDarkGray2Border,
+                             hAlignment: Int = JTextField.LEFT) {
     this.setBounds(x, y, width, height)
     this.text = text
     this.isEditable = editable
@@ -134,6 +135,7 @@ fun JTextField.setProperties(x: Int, y: Int, width: Int, height: Int, editable: 
     this.background = background
     this.caretColor = foreground
     this.border = border
+    this.horizontalAlignment = hAlignment
 }
 
 //JTable--------------------------------------------------------------------------------------------
