@@ -1,4 +1,4 @@
-package swingRAD.sMenuBar
+package swingRAD.sComponents
 
 import swingRAD.darkWhite
 import swingRAD.semiDarkGrayBlue
