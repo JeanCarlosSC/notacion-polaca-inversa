@@ -70,7 +70,7 @@ class Window: JFrame() {
     }
 
     private fun calculate() {
-        
+
     }
 
 }
