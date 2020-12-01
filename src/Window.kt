@@ -9,6 +9,7 @@ class Window: JFrame() {
 
     val tfInput = JTextField()
     val lAnswer = SLabel()
+    val lAnswer1 = SLabel()
 
     init{
         createMenuBar()
@@ -24,11 +25,14 @@ class Window: JFrame() {
         tfInput.addActionListener { calculate() }
         add(tfInput)
 
-        val lOutput = SLabel(590, 210, 100, 32, "Output", fontTitle)
+        val lOutput = SLabel(590, 230, 100, 32, "Output", fontTitle)
         add(lOutput)
 
-        lAnswer.setProperties(385, 320, 500, 40, hAlignment = "CENTER")
+        lAnswer.setProperties(385, 290, 500, 40, hAlignment = "CENTER")
         add(lAnswer)
+
+        lAnswer1.setProperties(385, 320, 500, 40, hAlignment = "CENTER")
+        add(lAnswer1)
 
         val pInfo = JPanel()
         pInfo.setProperties(200, 400, 900, 290)
@@ -72,6 +76,9 @@ class Window: JFrame() {
 
     private fun calculate() {
         lAnswer.text = tfInput.text.toSufijo()
+        repaint()
+
+        lAnswer1.text = if (lAnswer.text.calculate() == "NaN") "indeterminado" else lAnswer.text.calculate()
         repaint()
     }
 

@@ -1,4 +1,7 @@
 import logicRAD.isOperator
+import java.util.*
+import kotlin.math.pow
+
 
 fun String.toSufijo(): String {
     val colaDeSalida = mutableListOf<String>()
@@ -44,6 +47,41 @@ fun String.toSufijo(): String {
     }
 
     return colaDeSalida.toShortString()
+}
+
+//algoritmo RPN
+fun String.calculate(): String {
+    val st = StringTokenizer(this)
+    val pila = mutableListOf<String>()
+
+    while (st.hasMoreTokens()) {
+        val token = st.nextToken()
+        try {
+            when {
+                token[0].isDigit() -> {
+                    pila.add(token)
+                }
+                token[0].isLetter() -> {
+                    return ""
+                }
+                token[0].isOperator() -> {
+                    pila[pila.lastIndex - 1] = when (token) {
+                        "+" -> (pila[pila.lastIndex - 1].toDouble() + pila[pila.lastIndex].toDouble()).toString()
+                        "-" -> (pila[pila.lastIndex - 1].toDouble() - pila[pila.lastIndex].toDouble()).toString()
+                        "*" -> (pila[pila.lastIndex - 1].toDouble() * pila[pila.lastIndex].toDouble()).toString()
+                        "/" -> (pila[pila.lastIndex - 1].toDouble() / pila[pila.lastIndex].toDouble()).toString()
+                        "^" -> (pila[pila.lastIndex - 1].toDouble().pow(pila[pila.lastIndex].toDouble())).toString()
+                        else -> "error"
+                    }
+                    pila.removeLast()
+                }
+            }
+        } catch (e: Exception) {
+            return ""
+        }
+
+    }
+    return pila[0]
 }
 
 private fun MutableList<String>.toShortString(): String {
