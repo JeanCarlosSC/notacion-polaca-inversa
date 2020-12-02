@@ -2,7 +2,6 @@ import logicRAD.isOperator
 import java.util.*
 import kotlin.math.pow
 
-
 fun String.toSufijo(): String {
     val colaDeSalida = mutableListOf<String>()
     val stackDeOperadores = mutableListOf<String>()
@@ -11,9 +10,9 @@ fun String.toSufijo(): String {
     while (tokens.isNotEmpty()) {
         val token = tokens.first()
 
-        if (token[0].isLetterOrDigit()) {
+        if (token[0].isLetterOrDigit() || token.length > 1) {
             colaDeSalida.add(token)
-        } else if (token[0].isOperator()) {
+        } else if (token[0].isOperator() && token.length < 2) {
             if (stackDeOperadores.isEmpty())
                 stackDeOperadores.add(token)
             else {
@@ -58,12 +57,14 @@ fun String.calculate(): String {
         val token = st.nextToken()
         try {
             when {
-                token[0].isDigit() -> {
+                token[0].isDigit() || token.length > 1 -> {
                     pila.add(token)
                 }
+
                 token[0].isLetter() -> {
                     return ""
                 }
+
                 token[0].isOperator() -> {
                     pila[pila.lastIndex - 1] = when (token) {
                         "+" -> (pila[pila.lastIndex - 1].toDouble() + pila[pila.lastIndex].toDouble()).toString()
@@ -76,8 +77,8 @@ fun String.calculate(): String {
                     pila.removeLast()
                 }
             }
-        } catch (e: Exception) {
-            return ""
+        } catch (e: NumberFormatException) {
+            return "División por cero"
         }
 
     }
@@ -93,8 +94,15 @@ private fun MutableList<String>.toShortString(): String {
 }
 
 private fun String.toTokens(): MutableList<String> {
-    var str = this
+    //var str = this
     val tokens = mutableListOf<String>()
+    val st = StringTokenizer(this)
+
+    while (st.hasMoreTokens()) {
+        tokens.add(st.nextToken())
+    }
+
+    /*
     var token = ""
 
     while (str.isNotEmpty()) {
@@ -113,6 +121,7 @@ private fun String.toTokens(): MutableList<String> {
                 tokens.add(token)
         }
     }
+    */
 
     return tokens
 }

@@ -21,7 +21,7 @@ class Window: JFrame() {
         val lInput = SLabel(600, 100, 100, 32, "Input", fontTitle)
         add(lInput)
 
-        tfInput.setProperties(485, 140, 300, 40, hAlignment = JTextField.CENTER)
+        tfInput.setProperties(385, 140, 500, 40, hAlignment = JTextField.CENTER)
         tfInput.addActionListener { calculate() }
         add(tfInput)
 
@@ -78,7 +78,12 @@ class Window: JFrame() {
         lAnswer.text = tfInput.text.toSufijo()
         repaint()
 
-        lAnswer1.text = if (lAnswer.text.calculate() == "NaN") "indeterminado" else lAnswer.text.calculate()
+        lAnswer1.text =
+            if (lAnswer.text.calculate() == "NaN")
+                "Indeterminado"
+            else if (lAnswer.text.calculate() == "Infinity")
+                "División por cero"
+            else lAnswer.text.calculate()
         repaint()
     }
 
